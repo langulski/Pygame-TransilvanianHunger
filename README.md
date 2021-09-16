@@ -60,9 +60,13 @@ you can use the arrow keys to move the player and the SPACE bar to attack.
 ## Author
 Lucas Angulski
 
-## credits to the free assets:
+## credits for the free assets:
 
 Artwork created by Luis Zuno @ansimuz, his patreon https://www.patreon.com/ansimuz
 
-## credits to the music:
+## credits for the music:
 To be added but I will definitly use this one : * Tchort - De Mysteriis Dom Sathanas (Classic Cover Mayhem) *
+
+## credits for the Pygame tutorials:
+ <a href="https://www.youtube.com/channel/UCznj32AM2r98hZfTxrRo9bQ">Clear Code</a>.</br>
+
