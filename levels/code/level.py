@@ -158,7 +158,9 @@ class Level:
 
     def horizontal_movement_collision(self):
         player = self.player.sprite
+
         player.collision_rect.x += player.direction.x * player.speed
+
         for sprite in self.terrain_sprites.sprites():
             if sprite.rect.colliderect(player.collision_rect):
                 if player.direction.x <0:
@@ -170,10 +172,10 @@ class Level:
                     player.on_right = True
                     self.current_x = player.rect.right 
             
-        if player.on_left and (player.rect.left < self.current_x or player.direction.x >=0):
-             player.on_left= False
-        if player.on_right and (player.rect.right > self.current_x or player.direction.x <=0):
-             player.on_right = False
+        # if player.on_left and (player.rect.left < self.current_x or player.direction.x >=0):
+        #      player.on_left= False
+        # if player.on_right and (player.rect.right > self.current_x or player.direction.x <=0):
+        #      player.on_right = False
 
     def vertical_movement_collision(self):
         player = self.player.sprite
@@ -215,20 +217,32 @@ class Level:
     
     def scroll_y(self):
         player = self.player.sprite
+        player_x = player.rect.centerx
         player_y = player.rect.centery
         direction_y = player.direction.y
+        direction_x = player.direction.x
 
         if player_y < screen_height / 2 and direction_y < 0:
             self.world_shift_y = 8
-            self.player_on_ground = True
-            
+            if player_x < screen_width / 4 and direction_x < 0:
+                self.world_shift = 6
+                player.speed = 0
+            elif player_x > screen_width - (screen_width / 4) and direction_x > 0:
+                self.world_shift = -6
+                player.speed = 0
             
         elif player_y > screen_height - (screen_height / 4) and direction_y > 0:
             self.world_shift_y = -16
+            if player_x < screen_width / 4 and direction_x < 0:
+                self.world_shift = 6
+                player.speed = 0
+            elif player_x > screen_width - (screen_width / 4) and direction_x > 0:
+                self.world_shift = -6
+                player.speed = 0
             
             
         else:
-            self.world_shift_y = 0    
+            self.world_shift_y = 0  
 
 
     def get_player_on_ground(self):
@@ -239,7 +253,9 @@ class Level:
     
     
     def run(self):
-       
+       #world shift
+        self.scroll_x()
+        self.scroll_y()
         #decoration
 
             #sky
@@ -266,9 +282,6 @@ class Level:
         self.background_sprites.draw(self.display_surface)
         self.background_sprites.update(self.world_shift,self.world_shift_y)
 
-        #running the level
-        self.terrain_sprites.draw(self.display_surface)
-        self.terrain_sprites.update(self.world_shift,self.world_shift_y)
 
         # enemy
         self.enemy_sprites.update(self.world_shift,self.world_shift_y)
@@ -283,13 +296,15 @@ class Level:
 
         #player sprites
         self.player.update()
-        self.horizontal_movement_collision()
         self.goal.draw(self.display_surface)
         self.goal.update(self.world_shift,self.world_shift_y)
         self.get_player_on_ground()
-        self.vertical_movement_collision()
         self.player.draw(self.display_surface)
-
         self.create_landing_dust()
-        self.scroll_x()
-        self.scroll_y()
+        
+        #running the level
+        self.terrain_sprites.draw(self.display_surface)
+        self.terrain_sprites.update(self.world_shift,self.world_shift_y)
+        #collision player
+        self.vertical_movement_collision()
+        self.horizontal_movement_collision()

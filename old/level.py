@@ -103,16 +103,28 @@ class Level:
     
     def scroll_y(self):
         player = self.player.sprite
+        player_x = player.rect.centerx
         player_y = player.rect.centery
         direction_y = player.direction.y
+        direction_x = player.direction.x
 
         if player_y < screen_height / 2 and direction_y < 0:
             self.world_shift_y = 8
-            self.player_on_ground = True
-            
+            if player_x < screen_width / 4 and direction_x < 0:
+                self.world_shift = 6
+                player.speed = 0
+            elif player_x > screen_width - (screen_width / 4) and direction_x > 0:
+                self.world_shift = -6
+                player.speed = 0
             
         elif player_y > screen_height - (screen_height / 4) and direction_y > 0:
             self.world_shift_y = -16
+            if player_x < screen_width / 4 and direction_x < 0:
+                self.world_shift = 6
+                player.speed = 0
+            elif player_x > screen_width - (screen_width / 4) and direction_x > 0:
+                self.world_shift = -6
+                player.speed = 0
             
             
         else:
@@ -137,10 +149,10 @@ class Level:
                     player.on_right = True
                     self.current_x = player.rect.right
             
-        if player.on_left and (player.rect.left < self.current_x or player.direction.x >=0):
-             player.on_left= False
-        if player.on_right and (player.rect.right > self.current_x or player.direction.x <=0):
-             player.on_right = False
+        # if player.on_left and (player.rect.left < self.current_x or player.direction.x >=0):
+        #      player.on_left= False
+        # if player.on_right and (player.rect.right > self.current_x or player.direction.x <=0):
+        #      player.on_right = False
 
 
     def vertical_movement_collision(self):
@@ -169,13 +181,13 @@ class Level:
     
     def run(self):
         #dust particles
+        self.scroll_y()
+        self.scroll_x()
         self.dust_sprite.update(self.world_shift,self.world_shift_y)
         self.dust_sprite.draw(self.display_surface)
         #player
         self.player.update()
-        self.horizontal_movement_collision()
         self.get_player_on_ground()
-        self.vertical_movement_collision()
         self.create_landing_dust()
         self.player.draw(self.display_surface)
         
@@ -183,5 +195,5 @@ class Level:
         #level tiles
         self.tiles.draw(self.display_surface)
         self.tiles.update(self.world_shift,self.world_shift_y)
-        self.scroll_x()
-        self.scroll_y()
+        self.vertical_movement_collision()
+        self.horizontal_movement_collision()

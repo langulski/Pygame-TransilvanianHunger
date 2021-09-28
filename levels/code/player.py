@@ -18,7 +18,7 @@ class Player (pg.sprite.Sprite):
         self.speed = 6
         self.direction = pg.math.Vector2(0,0)
         self.gravity = 0.7
-        self.jump_speed = -10
+        self.jump_speed = -16
         self.collision_rect = pg.Rect(self.rect.topleft,(30,self.rect.height))
 
 
@@ -78,6 +78,8 @@ class Player (pg.sprite.Sprite):
             flipped_image = pg.transform.flip(image,True,False)
             self.image=flipped_image
             self.rect.bottomright = self.collision_rect.bottomright
+    
+        self.rect = self.image.get_rect(midbottom = self.rect.midbottom)
         # set the rect 
         # if self.on_ground and self.on_right:
         #      self.rect = self.image.get_rect(bottomright = self.rect.bottomright)

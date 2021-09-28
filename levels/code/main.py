@@ -7,8 +7,9 @@ from gamedata import level_0
 
 
 pg.init()
-
-screen = pg.display.set_mode((screen_width,screen_height))
+display = pg.Surface((400, 200))
+WINDOW_SIZE = (screen_width,screen_height)
+screen = pg.display.set_mode((screen_width,screen_height),0,32)
 clock = pg.time.Clock()
 level = Level(level_0,screen)
 
@@ -20,8 +21,10 @@ while True:
             pg.quit()
             sys.exit()
     
-    screen.fill('black')
+    # surf = pg.transform.scale(display, WINDOW_SIZE)
+    # screen.blit(surf, (0, 0))
     level.run()
+
 
     pg.display.update()
     clock.tick(60)
