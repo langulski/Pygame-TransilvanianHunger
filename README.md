@@ -46,7 +46,7 @@ you can use the arrow keys to move the player and the SPACE bar to attack.
 - [x] Classes to determine the objects of the game;<br>
 
 ### Challenges
-- Collide detection;
+- Collision detection;
 - Structure game code logic;
 - Fixing bugs;
 - Remember the rules for work with global variables inside functions;
