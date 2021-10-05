@@ -21,6 +21,6 @@ class Enemy (AnimatedTile):
 	def update(self,shift_x,shift_y):
 		self.rect.x += shift_x
 		self.rect.y += shift_y
-		self.animate()
 		self.move()
+		self.animate()
 		self.reverse_image()

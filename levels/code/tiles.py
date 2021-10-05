@@ -55,7 +55,7 @@ class AnimatedTile(Tile):
         self.image = self.frames[int(self.frame_index)]
             
     def update(self,shift_x,shift_y):
-        self.animate()
         self.rect.x += shift_x 
         self.rect.y += shift_y
+        self.animate()
 

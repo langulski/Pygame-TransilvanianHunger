@@ -194,5 +194,5 @@ class Player (pg.sprite.Sprite):
         self.animate()
         self.run_dust_animation()
       
-        pg.draw.rect(self.display_surface,'red',self.collision_rect)
+        #pg.draw.rect(self.display_surface,'red',self.collision_rect)
         

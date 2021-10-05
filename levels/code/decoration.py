@@ -13,9 +13,9 @@ class Sky:
 
 
     def __init__(self,horizon):
-        self.top = pg.image.load('graphics/decoration/sky/sky_top.png').convert()
-        self.middle = pg.image.load('graphics/decoration/sky/sky_middle.png').convert()
-        self.bottom = pg.image.load('graphics/decoration/sky/sky_bottom.png').convert()
+        self.top = pg.image.load('graphics/decoration/sky/sky_top.png').convert_alpha()
+        self.middle = pg.image.load('graphics/decoration/sky/sky_middle.png').convert_alpha()
+        self.bottom = pg.image.load('graphics/decoration/sky/sky_bottom.png').convert_alpha()
         self.horizon = horizon
 
         # strech
@@ -68,5 +68,5 @@ class Clound:
             self.clound_sprites.add(sprite)
     
     def draw(self,surface,shift_x,shift_y):
-        self.clound_sprites.update(shift_x,shift_y)
         self.clound_sprites.draw(surface)
+        self.clound_sprites.update(shift_x,shift_y)

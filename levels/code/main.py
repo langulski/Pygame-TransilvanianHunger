@@ -20,11 +20,12 @@ while True:
         if event.type == pg.QUIT:
             pg.quit()
             sys.exit()
-    
-    # surf = pg.transform.scale(display, WINDOW_SIZE)
-    # screen.blit(surf, (0, 0))
-    level.run()
 
+        
+	
+          
+    
+    level.run()
 
     pg.display.update()
     clock.tick(60)

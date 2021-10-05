@@ -258,11 +258,11 @@ class Level:
         self.scroll_y()
         #decoration
 
-            #sky
+        #sky
         self.sky.draw(self.display_surface)
-        self.clounds.draw(self.display_surface,self.world_shift,self.world_shift_y) 
         #castle
         self.castle.draw(self.display_surface) 
+       
 
         # grass
         self.grass_sprites.draw(self.display_surface)
@@ -282,6 +282,12 @@ class Level:
         self.background_sprites.draw(self.display_surface)
         self.background_sprites.update(self.world_shift,self.world_shift_y)
 
+        #clounds
+        self.clounds.draw(self.display_surface,self.world_shift,self.world_shift_y) 
+        
+        #running the level
+        self.terrain_sprites.draw(self.display_surface)
+        self.terrain_sprites.update(self.world_shift,self.world_shift_y)
 
         # enemy
         self.enemy_sprites.update(self.world_shift,self.world_shift_y)
@@ -302,9 +308,6 @@ class Level:
         self.player.draw(self.display_surface)
         self.create_landing_dust()
         
-        #running the level
-        self.terrain_sprites.draw(self.display_surface)
-        self.terrain_sprites.update(self.world_shift,self.world_shift_y)
         #collision player
         self.vertical_movement_collision()
         self.horizontal_movement_collision()
